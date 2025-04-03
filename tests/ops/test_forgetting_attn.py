@@ -83,7 +83,8 @@ def test_parallel(
     k = torch.randn((B, T, H, D), dtype=dtype, device=device).requires_grad_(True)
     v = torch.randn((B, T, H, D), dtype=dtype, device=device).requires_grad_(True)
     logit_min, logit_max = fgate_logit_range
-    g = F.logsigmoid(torch.rand((B, T, HQ), dtype=dtype, device=device) * (logit_max - logit_min) + logit_min).requires_grad_(True)
+    g = torch.rand((B, T, HQ), dtype=dtype, device=device) * (logit_max - logit_min) + logit_min
+    g = F.logsigmoid(g).requires_grad_(True)
     do = torch.randn((B, T, HQ, D), dtype=dtype, device=device)
     scale = D ** -0.5
 
