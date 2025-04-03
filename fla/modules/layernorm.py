@@ -18,12 +18,12 @@ import torch.nn as nn
 import torch.nn.functional as F
 import triton
 import triton.language as tl
+from einops import rearrange
 from torch.distributed import DeviceMesh
 from torch.distributed.tensor import DTensor, Replicate, Shard, distribute_module
 from torch.distributed.tensor.parallel import ParallelStyle
 
 from fla.utils import get_multiprocessor_count, input_guard
-from einops import rearrange
 
 
 def layer_norm_ref(
@@ -73,6 +73,7 @@ def rms_norm_ref(
     out = out.to(dtype)
     return out if not prenorm else (out, x)
 
+
 def group_norm_ref(
     x: torch.Tensor,
     weight: torch.Tensor,
@@ -106,6 +107,7 @@ def group_norm_ref(
     out = rearrange(out, "... g d -> ... (g d)")
     out = out.to(dtype)
     return out if not prenorm else (out, x)
+
 
 class GroupNormRef(nn.Module):
 
