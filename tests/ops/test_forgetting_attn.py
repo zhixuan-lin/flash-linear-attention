@@ -151,7 +151,8 @@ def test_parallel_varlen(
     k = torch.randn((1, T, H, D), dtype=dtype, device=device).requires_grad_()
     v = torch.randn((1, T, H, D), dtype=dtype, device=device).requires_grad_()
     logit_min, logit_max = fgate_logit_range
-    g = F.logsigmoid(torch.rand((1, T, HQ), dtype=dtype, device=device) * (logit_max - logit_min) + logit_min).requires_grad_()
+    g = torch.rand((1, T, HQ), dtype=dtype, device=device) * (logit_max - logit_min) + logit_min
+    g = F.logsigmoid(g).requires_grad_(True)
     do = torch.randn((1, T, HQ, D), dtype=dtype, device=device)
 
     ref = q.new_empty(1, T, HQ, D)
