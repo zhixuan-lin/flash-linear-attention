@@ -30,8 +30,7 @@ This repo aims at providing a collection of efficient Triton-based implementatio
 ## News
 - **$\texttt{[2025-04]}$:** 🎉 Add DeltaProduct implementation to `fla` ([paper](https://arxiv.org/abs/2502.10297)).
 - **$\texttt{[2025-04]}$:** 🎉 Add FoX implementation to `fla` ([paper](https://arxiv.org/abs/2503.02130)).
-- **$\texttt{[2025-03]}$:** ~~We have changed the default 
-`initializer_range` to the magic 🐳 0.006~~ The `initializer_range` was rolled back to the default value of 0.02. For actual training, we recommend trying both. 
+- **$\texttt{[2025-03]}$:** ~~We have changed the default `initializer_range` to the magic 🐳 0.006~~ The `initializer_range` was rolled back to the default value of 0.02. For actual training, we recommend trying both.
 - **$\texttt{[2025-02]}$:** 🐳 Add NSA implementations to `fla`. See kernels [here](fla/ops/nsa).
 - **$\texttt{[2025-01]}$:** 🔥 We are migrating to `torchtitan`-based training framework. Check out the [flame](https://github.com/fla-org/flame) repo for more details.
 - **$\texttt{[2025-01]}$:** 🎉 Add RWKV7 implementations (both kernels and models) to `fla`.
@@ -400,7 +399,7 @@ $ python -m evals.harness --model hf \
     --batch_size 64 \
     --num_fewshot 0 \
     --device cuda \
-    --show_config  
+    --show_config
 ```
 
 We've made `fla` compatible with hf-style evaluations, you can call [evals.harness](evals/harness.py) to finish the evaluations.
@@ -423,7 +422,7 @@ $ accelerate launch -m evals.harness --model hf  \
 
 4. 📏 RULER Benchmark suite
 
-The RULER benchmarks are commonly used for evaluating model performance on long-context tasks. 
+The RULER benchmarks are commonly used for evaluating model performance on long-context tasks.
 You can evaluate `fla` models on RULER directly using `lm-evaluation-harness`. RULER is only available in a relatively recent version of `lm-evaluation-harness`, so make sure you have the latest version installed.
 
 ```
